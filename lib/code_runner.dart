@@ -20,5 +20,14 @@ class CodeRunner {
     print(car2);
     print(carCopy);
     print(car == car2);
+
+    var json = car.toJson();
+
+    print('json: \n');
+    print(json);
+
+    print('from json: \n');
+    print(BuiltVehicle.fromJson(json).rebuild((b) => b..price = 10075));
+
   }
 }
