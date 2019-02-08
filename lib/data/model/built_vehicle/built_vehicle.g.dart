@@ -6,20 +6,55 @@ part of built_vehicle;
 // BuiltValueGenerator
 // **************************************************************************
 
+const VehicleType _$car = const VehicleType._('car');
+const VehicleType _$motorbike = const VehicleType._('motorbike');
+const VehicleType _$train = const VehicleType._('train');
+const VehicleType _$plane = const VehicleType._('plane');
+
+VehicleType _$valueOf(String name) {
+  switch (name) {
+    case 'car':
+      return _$car;
+    case 'motorbike':
+      return _$motorbike;
+    case 'train':
+      return _$train;
+    case 'plane':
+      return _$plane;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<VehicleType> _$values =
+    new BuiltSet<VehicleType>(const <VehicleType>[
+  _$car,
+  _$motorbike,
+  _$train,
+  _$plane,
+]);
+
 class _$BuiltVehicle extends BuiltVehicle {
   @override
   final String brand;
   @override
-  final String type;
+  final VehicleType type;
   @override
   final double price;
   @override
   final bool someNullableValue;
+  @override
+  final BuiltList<String> passengers;
 
   factory _$BuiltVehicle([void updates(BuiltVehicleBuilder b)]) =>
       (new BuiltVehicleBuilder()..update(updates)).build();
 
-  _$BuiltVehicle._({this.brand, this.type, this.price, this.someNullableValue})
+  _$BuiltVehicle._(
+      {this.brand,
+      this.type,
+      this.price,
+      this.someNullableValue,
+      this.passengers})
       : super._() {
     if (brand == null) {
       throw new BuiltValueNullFieldError('BuiltVehicle', 'brand');
@@ -29,6 +64,9 @@ class _$BuiltVehicle extends BuiltVehicle {
     }
     if (price == null) {
       throw new BuiltValueNullFieldError('BuiltVehicle', 'price');
+    }
+    if (passengers == null) {
+      throw new BuiltValueNullFieldError('BuiltVehicle', 'passengers');
     }
   }
 
@@ -46,14 +84,16 @@ class _$BuiltVehicle extends BuiltVehicle {
         brand == other.brand &&
         type == other.type &&
         price == other.price &&
-        someNullableValue == other.someNullableValue;
+        someNullableValue == other.someNullableValue &&
+        passengers == other.passengers;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, brand.hashCode), type.hashCode), price.hashCode),
-        someNullableValue.hashCode));
+        $jc($jc($jc($jc(0, brand.hashCode), type.hashCode), price.hashCode),
+            someNullableValue.hashCode),
+        passengers.hashCode));
   }
 
   @override
@@ -62,7 +102,8 @@ class _$BuiltVehicle extends BuiltVehicle {
           ..add('brand', brand)
           ..add('type', type)
           ..add('price', price)
-          ..add('someNullableValue', someNullableValue))
+          ..add('someNullableValue', someNullableValue)
+          ..add('passengers', passengers))
         .toString();
   }
 }
@@ -75,9 +116,9 @@ class BuiltVehicleBuilder
   String get brand => _$this._brand;
   set brand(String brand) => _$this._brand = brand;
 
-  String _type;
-  String get type => _$this._type;
-  set type(String type) => _$this._type = type;
+  VehicleType _type;
+  VehicleType get type => _$this._type;
+  set type(VehicleType type) => _$this._type = type;
 
   double _price;
   double get price => _$this._price;
@@ -88,6 +129,12 @@ class BuiltVehicleBuilder
   set someNullableValue(bool someNullableValue) =>
       _$this._someNullableValue = someNullableValue;
 
+  ListBuilder<String> _passengers;
+  ListBuilder<String> get passengers =>
+      _$this._passengers ??= new ListBuilder<String>();
+  set passengers(ListBuilder<String> passengers) =>
+      _$this._passengers = passengers;
+
   BuiltVehicleBuilder();
 
   BuiltVehicleBuilder get _$this {
@@ -96,6 +143,7 @@ class BuiltVehicleBuilder
       _type = _$v.type;
       _price = _$v.price;
       _someNullableValue = _$v.someNullableValue;
+      _passengers = _$v.passengers?.toBuilder();
       _$v = null;
     }
     return this;
@@ -116,12 +164,26 @@ class BuiltVehicleBuilder
 
   @override
   _$BuiltVehicle build() {
-    final _$result = _$v ??
-        new _$BuiltVehicle._(
-            brand: brand,
-            type: type,
-            price: price,
-            someNullableValue: someNullableValue);
+    _$BuiltVehicle _$result;
+    try {
+      _$result = _$v ??
+          new _$BuiltVehicle._(
+              brand: brand,
+              type: type,
+              price: price,
+              someNullableValue: someNullableValue,
+              passengers: passengers.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'passengers';
+        passengers.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'BuiltVehicle', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

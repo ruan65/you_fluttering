@@ -5,15 +5,16 @@ class CodeRunner {
     var car = BuiltVehicle((b) => b
       ..brand = 'Tesla'
       ..price = 100000
-      ..type = 'car'
+      ..type = VehicleType.car
+      ..passengers.addAll(['John', 'Yoco Ono'])
       ..someNullableValue = true);
 
     var car2 = BuiltVehicle((b) => b
       ..brand = 'Tesla'
       ..price = 100000
-      ..type = 'car');
+      ..type = VehicleType.car);
 
-    var carCopy = car.rebuild((b) => b..brand = 'BMW');
+    var carCopy = car.rebuild((b) => b..type = VehicleType.train..brand = 'Sapsan');
 
     print(car);
     print(car2);
