@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:you_fluttering/code_runner.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   void _runCode() {
-    CodeRunner.runCode();
+    print('clickiiiii');
   }
 
   @override
